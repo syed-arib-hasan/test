@@ -140,7 +140,39 @@
             background-color: #a0a0a0;
             cursor: not-allowed;
         }
+
+        .form-group-inline {
+        display: inline-flex;
+        gap: 2px;
+        padding: 10;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+        .form-group-inline .form-group {
+        flex: 1;
+    }
+
         </style>
+        <script>
+            // JavaScript to get user's location
+            function getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        function (position) {
+                            // Set the values in the input fields
+                            document.getElementById("latitude").value = position.coords.latitude;
+                            document.getElementById("longitude").value = position.coords.longitude;
+                        },
+                        function (error) {
+                            alert("Unable to retrieve location. Please enable location access.");
+                        }
+                    );
+                } else {
+                    alert("Geolocation is not supported by this browser.");
+                }
+            }
+        </script>
 </head>
 <body>
     <main class="auth-container">
@@ -199,7 +231,11 @@
                         required
                     >
                 </div>
-
+                <div class="form-group-inline">
+                    <input type="text" class="form-input" id="latitude"  name="latitude" placeholder="latitude" readonly>
+                    <input type="text"  class="form-input" id="longitude" placeholder="longitude" readonly>
+                    <button type="submit" class="btn btn-primary" onclick="getLocation()">Insert</button>
+                </div>
                 <div class="form-group">
                     <label class="form-label" for="password">Password</label>
                     <input 
@@ -212,15 +248,11 @@
                     >
                     <p class="text-sm mt-1 text-secondary">Must be at least 8 characters long</p>
                 </div>
-
-            
-
                 <button type="submit" class="btn btn-primary w-full">Create Account</button>
             </form>
-
             <p class="text-center mt-4">
                 Already have an account? 
-                <a href="login.html" class="text-primary font-bold">Sign in</a>
+                <a href="index.html" class="text-primary font-bold">Sign in</a>
             </p>
         </div>
     </main>

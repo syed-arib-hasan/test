@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LendShare - Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        :root {
+            --primary-color: #800000;
+            --secondary-color: #4a0404;
+            --text-color: #333;
+            --border-color: #dcdde1;
+            --bg-light: #f5f5f5;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 250px;
+            background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 1rem;
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-menu a {
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .sidebar-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-menu a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .main-content {
+            
+            margin-left: 250px;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 7rem;
+         
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--primary-color);
+            transition: transform 0.3s;
+            text-align: justify;
+            
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-pic {
+            width: 100%;
+            height: 300px;
+            margin: 1rem 0;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .card-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card p {
+            margin: 0.5rem 0;
+            line-height: 1.4;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .map {
+            grid-column: 1 / -1;
+        }
+
+        .map iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .main-content {
+                margin-left: 0;
+                grid-template-columns: 1fr;
+            }
+
+            .map iframe {
+                height: 300px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeIn 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>LendShare</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html" class="active">Dashboard</a></li>
+            <li><a href="searchpage.html">Search</a></li>
+            <li><a href="inventory.html">Inventory</a></li>
+            <li><a href="history.html">History</a></li>
+            <li><a href="my_account.html">My Account</a></li>
+            <li><a href="index.html">Log Out</a></li>
+        </ul>
+    </div>
+    <main class="main-content">
+        <div class="card">
+            <h2>Lender Profile</h2>
+            <div class="card-pic">
+                <img src="https://scontent.fdac31-2.fna.fbcdn.net/v/t39.30808-6/449703274_996697182113271_7482069938669825185_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGZqn8T3YPpcI2DdMChdn1unxEvIu6eo7CfES8i7p6jsKeRXbG4IzbcX8V-nnkIBy_-QQnUxqwMgf7rOolSi7zt&_nc_ohc=SzRFsKhP3ykQ7kNvgEyFpCW&_nc_oc=AdjiMKIt-DDvYr79z6uBJ53v5BMzS1_BZbRpjK5U5ABsdrc_vkzsYevKZJL0-jZe6tE&_nc_zt=23&_nc_ht=scontent.fdac31-2.fna&_nc_gid=AM10Mrlj042iieASKvX18t4&oh=00_AYB7-0QCBGUuksuqF5OyMMl08fY2dMIlaBXHtxouSzPFqw&oe=676F5D0D" alt="Lender Profile">
+            </div>
+            <p><strong>Name:</strong> Syed Arib Hasan</p>
+            <p><strong>Email:</strong> arib@gmail.com</p>
+            <p><strong>Phone:</strong> 016******</p>
+        </div>
+
+        <div class="card">
+            <h2>Borrowing Details</h2>
+            <div class="card-pic">
+                <img src="https://cms.expertphotography.com/wp-content/uploads/2018/02/DSLR-camera-DSLRSLR-1-1.jpg" alt="Item Image">
+            </div>
+            <p><strong>Name:</strong> DSLR</p>
+            <p><strong>Return Date:</strong> 9 Dec 2024</p>
+            <button class="btn-primary">Borrow Request</button>
+        </div>
+        <div class="card">
+            <h2>Item Description</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+
+        </div>
+        <div class="card map">
+            <iframe src="https://www.google.com/maps?q=23.78502324521042,90.42359637993883&output=embed"></iframe>
+        </div>
+    </main>
+</body>
+</html>
