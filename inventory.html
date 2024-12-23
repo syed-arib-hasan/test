@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LendShare - Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        :root {
+            --primary-color: #800000;
+            --secondary-color: #4a0404;
+            --dark-maroon: #2b0000;
+            --light-maroon: #ffebeb;
+            --text-color: #333;
+            --border-color: #dcdde1;
+            --bg-light: #f5f5f5;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+        h1{
+            text-align: center;
+            padding-bottom: 10px;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 250px;
+            background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 1rem;
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-menu a {
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .sidebar-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-menu a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            margin-left: 250px;
+            padding: 2rem;
+        }
+
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .search-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .search-bar {
+            width: 60%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+        }
+
+        .filter-section {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .filter-section label {
+            margin: 0 10px;
+        }
+
+        /* Items Grid */
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .item-card {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .item-card:hover {
+            transform: scale(1.05);
+        }
+
+        .item-title {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .item-location {
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .btn-primary {
+            background-color: #800000; /* Maroon */
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .btn-primary:hover {
+            background-color: #660000; /* Darker Maroon */
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .inventory-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .inventory-list {
+                grid-template-columns: 1fr;
+            }
+        }
+        .status{
+            font-weight: bold;
+            color: #2e8b57;
+        }
+        .status.unavailable{
+            color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>LendShare</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="searchpage.html">Search</a></li>
+            <li><a href="inventory.html" class="active">Inventory</a></li>
+            <li><a href="history.html">History</a></li>
+            <li><a href="my_account.html">My Account</a></li>
+            <li><a href="login.html">Log Out</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <h1>Search Your Inventory</h1>
+        <div class="search-filter">
+            <input type="text" class="search-bar" placeholder="Search items...">
+            <button class="btn-primary">Add New Item</button>
+        </div>
+        <div class="filter-section">
+            <p>Filter by:</p>
+            <label><input type="checkbox" value="book"> Books</label>
+            <label><input type="checkbox" value="electronic"> Electronics</label>
+            <label><input type="checkbox" value="tour"> Tour Gears</label>
+            <label><input type="checkbox" value="available"> Available</label>
+            <label><input type="checkbox" value="unavailable"> Unavailable</label>
+        </div>
+        <div class="items-grid">
+            <div class="item-card">
+                <h3>Book Title 1</h3>
+                <p>Location: Library</p>
+                <p class="status">Available</p>
+            </div>
+            <div class="item-card">
+                <h3>Electronics 1</h3>
+                <p>Location: Home</p>
+                <p class="status unavailable">Unavailable</p>
+            </div>
+            <div class="item-card">
+                <h3>Tour Gear 1</h3>
+                <p>Location: Storage</p>
+                <p class="status">Available</p>
+            </div>
+            <div class="item-card">
+                <h3>Book Title 2</h3>
+                <p>Location: Library</p>
+                <p class="status unavailable">Unavailable</p>
+            </div>
+            <!-- Item 5 -->
+            <div class="item-card">
+                <h3>Electronics 2</h3>
+                <p>Location: Home</p>
+                <p class="status">Available</p>
+            </div>
+
+            <!-- Item 6 -->
+            <div class="item-card">
+                <h3>Tour Gear 2</h3>
+                <p>Location: Storage</p>
+                <p class="status">Available</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

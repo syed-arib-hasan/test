@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LendShare - Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        :root {
+            --primary-color: #800000;
+            --secondary-color: #4a0404;
+            --dark-maroon: #2b0000;
+            --light-maroon: #ffebeb;
+            --text-color: #333;
+            --border-color: #dcdde1;
+            --bg-light: #f5f5f5;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 250px;
+            background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 1rem;
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-menu a {
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .sidebar-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-menu a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            margin-left: 250px;
+            padding: 2rem;
+        }
+
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .search-bar {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            width: 300px;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Stats Grid Styles */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .stat-card h3 {
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .stat-card .value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* Items Section Styles */
+        .items-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .items-card {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .items-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-maroon);
+            font-size: 1.25rem;
+        }
+
+        .item-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .item {
+            display: grid;
+            grid-template-columns: auto 1fr auto auto;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .item:hover {
+            box-shadow: var(--shadow-sm);
+            background-color: var(--white);
+        }
+
+        .item-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--light-maroon);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.25rem;
+        }
+
+        .item-details h4 {
+            color: var(--text-color);
+            margin-bottom: 0.25rem;
+            font-size: 1rem;
+        }
+
+        .item-details p {
+            color: #666;
+            font-size: 0.875rem;
+        }
+
+        .due-date {
+            color: var(--primary-color);
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-align: right;
+        }
+
+        /* Status Indicators */
+        .status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .status.borrowed {
+            background-color: #ffeaa7;
+            color: #b7791f;
+        }
+
+        .status.available {
+            background-color: #c6f6d5;
+            color: #2f855a;
+        }
+
+        .status.overdue {
+            background-color: #fed7d7;
+            color: #c53030;
+        }
+
+        /* Categories Grid */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-card {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .category-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .category-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Activities Table */
+        .activities-card {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .activities-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .activities-table th,
+        .activities-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .activities-table th {
+            font-weight: 600;
+            color: var(--text-color);
+            background-color: var(--bg-light);
+        }
+
+        .activities-table tr:hover {
+            background-color: var(--bg-light);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .items-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-bar {
+                width: 100%;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-card, .items-card, .category-card, .activities-card {
+            animation: fadeIn 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>LendShare</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html" class="active">Dashboard</a></li>
+            <li><a href="searchpage.html" >Search</a></li>
+            <li><a href="inventory.html" >Inventory</a></li>
+            <li><a href="history.html">History</a></li>
+            <li><a href="my_account.html">My Account</a></li>
+            <li><a href="login.html">Log Out</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>Welcome back, User!</h1>
+            <input type="search" class="search-bar" placeholder="Search items...">
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Items You're Lending</h3>
+                <div class="value">12</div>
+            </div>
+            <div class="stat-card">
+                <h3>Items You've Borrowed</h3>
+                <div class="value">3</div>
+            </div>
+            <div class="stat-card">
+                <h3>Active Requests</h3>
+                <div class="value">5</div>
+            </div>
+            <div class="stat-card">
+                <h3>Items Due Soon</h3>
+                <div class="value">2</div>
+            </div>
+        </div>
+
+        <div class="items-section">
+            <!-- Currently Lending Section -->
+            <div class="items-card">
+                <h3>Currently Lending</h3>
+                <div class="item-list">
+                    <div class="item">
+                        
+                        <div class="item-details">
+                            <h4>Python Programming Book</h4>
+                            <p>Borrowed by: John Doe</p>
+                        </div>
+                        <div class="due-date">Due: Dec 25, 2024</div>
+                        
+                    </div>
+                    <div class="item">
+
+                        <div class="item-details">
+                            <h4>DSLR Camera</h4>
+                            <p>Borrowed by: Sarah Smith</p>
+                        </div>
+                        <div class="due-date">Due: Dec 28, 2024</div>
+
+                    </div>
+                    <div class="item">
+                        <div class="item-details">
+                            <h4>Camping Tent</h4>
+                            <p>Borrowed by: Mike Wilson</p>
+                        </div>
+                        <div class="due-date">Due: Dec 20, 2024</div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Currently Borrowing Section -->
+            <div class="items-card">
+                <h3>Currently Borrowing</h3>
+                <div class="item-list">
+                    <div class="item">
+                        <div class="item-details">
+                            <h4>MacBook Pro</h4>
+                            <p>Lent by: Emma Thompson</p>
+                        </div>
+                        <div class="due-date">Due: Dec 30, 2024</div>
+
+                    </div>
+                    <div class="item">
+
+                        <div class="item-details">
+                            <h4>Noise-Canceling Headphones</h4>
+                            <p>Lent by: Alex Chen</p>
+                        </div>
+                        <div class="due-date">Due: Dec 27, 2024</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="categories-grid">
+            <div class="category-card">
+                <h3>Books</h3>
+                <p>Currently Lending: 5</p>
+                <p>Currently Borrowing: 1</p>
+                <p>Available: 3</p>
+            </div>
+            <div class="category-card">
+                <h3>Electronics</h3>
+                <p>Currently Lending: 3</p>
+                <p>Currently Borrowing: 1</p>
+                <p>Available: 2</p>
+            </div>
+            <div class="category-card">
+                <h3>Tour Gear</h3>
+                <p>Currently Lending: 4</p>
+                <p>Currently Borrowing: 1</p>
+                <p>Available: 2</p>
+            </div>
+        </div>

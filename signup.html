@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | Item Sharing Platform</title>
+    <style>/* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #800000 0%, #4a0404 50%, #2b0000 100%);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        a.text-primary {
+            color: #800000; /* Maroon */
+        }
+        
+        a.text-primary:hover {
+            text-decoration: underline;
+        }
+        
+        .text-secondary {
+            color: #666;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .text-lg {
+            font-size: 1.5em;
+        }
+        
+        .text-sm {
+            font-size: 0.875em;
+        }
+        
+        .font-bold {
+            font-weight: bold;
+        }
+        
+        .mb-4 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .mt-4 {
+            margin-top: 1.5rem;
+        }
+        
+        .mt-1 {
+            margin-top: 0.25rem;
+        }
+        
+        .w-full {
+            width: 100%;
+        }
+        
+        /* Authentication Container */
+        .auth-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Card */
+        .auth-card {
+            padding: 20px;
+        }
+        
+        /* Form Styles */
+        .form {
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+        
+        .form-input:focus {
+            border-color: #800000; /* Maroon */
+            outline: none;
+            box-shadow: 0 0 5px rgba(128, 0, 0, 0.5);
+        }
+        
+        .form-check {
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-check input {
+            margin-right: 10px;
+        }
+        
+        /* Button Styles */
+        .btn-primary {
+            background-color: #800000; /* Maroon */
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            text-align: center;
+        }
+        
+        .btn-primary:hover {
+            background-color: #660000; /* Darker Maroon */
+        }
+        
+        .btn-primary:disabled {
+            background-color: #a0a0a0;
+            cursor: not-allowed;
+        }
+        </style>
+</head>
+<body>
+    <main class="auth-container">
+        <div class="card auth-card">
+            <div class="text-center mb-4">
+                <img src="/api/placeholder/64/64" alt="Logo" class="mb-4">
+                <h1 class="text-lg font-bold mb-2">Create Your Account</h1>
+                <p class="text-sm text-secondary">Join our community to start sharing items</p>
+            </div>
+
+            <form action="#" method="POST" class="form">
+                <div class="form-group">
+                    <label class="form-label" for="name">Full Name</label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        class="form-input"
+                        placeholder="Arib Hasan" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        class="form-input"
+                        placeholder="arib@example.com" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="phone">Phone Number</label>
+                    <input 
+                        type="tel" 
+                        id="phone" 
+                        name="phone" 
+                        class="form-input"
+                        placeholder="Your phone number" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="address">Address</label>
+                    <input 
+                        type="text" 
+                        id="address" 
+                        name="address" 
+                        class="form-input"
+                        placeholder="Street, City, Country" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="form-input"
+                        placeholder="Create a strong password" 
+                        required
+                    >
+                    <p class="text-sm mt-1 text-secondary">Must be at least 8 characters long</p>
+                </div>
+
+            
+
+                <button type="submit" class="btn btn-primary w-full">Create Account</button>
+            </form>
+
+            <p class="text-center mt-4">
+                Already have an account? 
+                <a href="login.html" class="text-primary font-bold">Sign in</a>
+            </p>
+        </div>
+    </main>
+</body>
+</html>
