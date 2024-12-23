@@ -306,6 +306,21 @@
         .card-footer .penalty {
             color: #e74c3c;
         }
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeIn 0.3s ease-out;
+        }
     </style>
 </head>
 <body>
@@ -319,7 +334,7 @@
             <li><a href="inventory.html">Inventory</a></li>
             <li><a href="history.html"  class="active">History</a></li>
             <li><a href="my_account.html">My Account</a></li>
-            <li><a href="login.html">Log Out</a></li>
+            <li><a href="index.html">Log Out</a></li>
         </ul>
     </div>
     <div class="main-content">
