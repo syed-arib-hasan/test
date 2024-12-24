@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <title>LendShare - Dashboard</title>
     <style>
         /* Previous styles remain the same until .edit-btn */
@@ -173,11 +175,27 @@
             transition: opacity 0.3s ease;
             z-index: 2;
         }
+        .dlt-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 3px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
 
         .item-card:hover .edit-btn {
             opacity: 1;
         }
-
+        .item-card:hover .dlt-btn {
+            opacity: 1;
+        }
         /* Updated save/cancel button container */
         .button-container {
             display: none;
@@ -297,6 +315,7 @@
     </style>
 </head>
 <body>
+    
     <div class="sidebar">
         <div class="sidebar-header">
             <h2>LendShare</h2>
@@ -316,7 +335,7 @@
         <div class="search-filter">
             <input type="text" class="search-bar" placeholder="Search items...">
             <button class="btn-primary">Add New Item</button>
-            <button class="btn-primary">Remove Item</button>
+
         </div>
         <div class="filter-section">
             <p>Filter by:</p>
@@ -340,6 +359,7 @@
                     <option value="unavailable">Unavailable</option>
                 </select>
                 <button class="edit-btn" onclick="toggleEdit(this.parentElement)">Edit</button>
+                <button class="dlt-btn"><i style="font-size:18px" class="fa">&#xf014;</i></button>
                 <div class="button-container">
                     <button class="save-btn" onclick="saveChanges(this.parentElement.parentElement)">Save</button>
                     <button class="cancel-btn" onclick="cancelEdit(this.parentElement.parentElement)">Cancel</button>
@@ -364,6 +384,8 @@
                     <button class="cancel-btn" onclick="cancelEdit(this.parentElement.parentElement)">Cancel</button>
                 </div>
             </div>
+
+
             <div class="item-card">
                 <div class="item-image-container">
                     <img src="/api/placeholder/200/200" alt="Electronics 1" class="item-image">
